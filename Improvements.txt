@@ -1,0 +1,12 @@
+showhospitalpatients.php improvements:
+
+1. I will use the Symfony framework and will create a controller with an action where I will put the code that gets the patients by hospital. So I will have much more control if I have to apply some more business logic.
+
+If I have to stay with that file I can improve the follow things:
+
+1. I will move pass $hospitalId to the function getHospitalPatients() as parameter and will remove global $request
+2. I will validate $hospitalId better - it must be an integer that is greater than 0.
+3. I will move the namespaces in the "use" header of the file so that I will use short class names.
+5. When I call $hospitalRepository->selectById($hospitalId) I will check the result. It depends how selectById() is implemented - it can throw an exception or return null if there is no hospital with passed ID. If there is no such hospital we can't call $patientRepository->selectByHospital($hospital).
+6. The results "hospital" and "patients" in the JSON response must be converted to arrays otherwise there will be no data.
+7. return getHospitalPatients() will not do the job, because it will send nothing through HTTP. I have to use something like "echo getHospitalPatients()" (it will call JsonResponse::__toString() method) that will send HTTP header with JSON data or to make an instance of Symfony kernel and to use it to handle the response.
