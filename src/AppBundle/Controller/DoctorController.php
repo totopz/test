@@ -40,7 +40,7 @@ class DoctorController extends Controller
                 'name' => $doctor->getName(),
             ],
             'patients' => $patients,
-            'msg' => 'Here are the patients of doctor ' . $doctor->getName(),
+            'msg' => 'Patient ' . $patient->getName() . ' was sucessfully added to doctor ' . $doctor->getName(),
         ]);
     }
 }
